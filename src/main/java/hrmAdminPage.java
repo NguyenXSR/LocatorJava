@@ -20,7 +20,7 @@ public class hrmAdminPage {
         options.setExperimentalOption("useAutomationExtension", false);
 
         WebDriver driver = new ChromeDriver(options);
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index");
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
