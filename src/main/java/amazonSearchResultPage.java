@@ -7,9 +7,23 @@ import java.time.Duration;
 
 public class amazonSearchResultPage {
 
+    public static void checkDisplay(WebDriver driver, By locator, String elementName) {
+        try {
+            WebElement element = driver.findElement(locator);
+            if (element.isDisplayed()) {
+                System.out.println("Displayed: " + elementName);
+            } else {
+                System.out.println("Not visible: " + elementName);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Not found: " + elementName);
+        } catch (Exception e) {
+            System.out.println("Error checking: " + elementName + " -> " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
 
-        // Setup Chrome
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.setExperimentalOption("useAutomationExtension", false);
@@ -33,7 +47,7 @@ public class amazonSearchResultPage {
             WebElement btnSearch = driver.findElement(By.cssSelector("input#nav-search-submit-button"));
             btnSearch.click();
         } catch (NoSuchElementException e) {
-            // fallback (A/B testing)
+
             WebElement txtSearch = driver.findElement(By.cssSelector("input#nav-bb-search"));
             txtSearch.sendKeys("adidas");
             WebElement btnSearch = driver.findElement(By.cssSelector("input.nav-bb-button"));
@@ -42,7 +56,7 @@ public class amazonSearchResultPage {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        // ---- FUNCTION: Check Display ----
+
         checkDisplay(driver, By.xpath("//div[@role='listitem'][3]//img"), "1 - Image of 3rd item");
         checkDisplay(driver, By.xpath("(//div[@class='a-section aok-inline-block'])[4]"), "2 - Price list of 4th item");
         checkDisplay(driver, By.xpath("(//span[@class='a-price'])[7]"), "3 - Price of 7th item");
@@ -61,19 +75,4 @@ public class amazonSearchResultPage {
         driver.quit();
     }
 
-    //Cover cho viec load page qua lau
-    public static void checkDisplay(WebDriver driver, By locator, String elementName) {
-        try {
-            WebElement element = driver.findElement(locator);
-            if (element.isDisplayed()) {
-                System.out.println("Displayed: " + elementName);
-            } else {
-                System.out.println("Not visible: " + elementName);
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println("Not found: " + elementName);
-        } catch (Exception e) {
-            System.out.println("Error checking: " + elementName + " -> " + e.getMessage());
-        }
-    }
 }
