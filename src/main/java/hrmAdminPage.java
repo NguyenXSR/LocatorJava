@@ -22,7 +22,7 @@ public class hrmAdminPage {
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
 
         By TxtUsername = By.xpath("//input[@placeholder='Username']");
